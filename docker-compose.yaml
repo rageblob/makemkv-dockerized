@@ -1,0 +1,16 @@
+services:
+  makemkv:
+    image: jlesage/makemkv:latest
+    ports:
+      - target: 5800
+        host_ip: 127.0.0.1
+        published: 9000
+        protocol: tcp
+        mode: host
+    volumes:
+      - $PWD/config:/config:rw
+      - $HOME/Downloads/makemkv:/output:rw
+      - $HOME:/storage:ro
+    devices:
+      - "/dev/sr0:/dev/sr0"
+      - "/dev/sg3:/dev/sg3" # if no drive shows up in the GUI, try sg0, sg1, or sg2
